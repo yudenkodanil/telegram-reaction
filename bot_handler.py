@@ -9,7 +9,7 @@ logger = setup_logger()
 
 # Путь к сессии внутри volume
 os.makedirs("sessions", exist_ok=True)  # создаём папку, если её нет
-session_path = f"sessions/{SESSION_NAME}.session"
+session_path = f"sessions/{SESSION_NAME}"
 
 app = Client(session_path, API_ID, API_HASH)
 
