@@ -3,10 +3,14 @@ from pyrogram.errors import FloodWait
 import asyncio
 from config import API_ID, API_HASH, SESSION_NAME, REACTION, CHANNELS
 from logger_setup import setup_logger
+import os
 
 logger = setup_logger()
-# Используем сессию из volume
-session_path = f"sessions/{SESSION_NAME}"
+
+# Путь к сессии внутри volume
+os.makedirs("sessions", exist_ok=True)  # создаём папку, если её нет
+session_path = f"sessions/{SESSION_NAME}.session"
+
 app = Client(session_path, API_ID, API_HASH)
 
 
@@ -23,3 +27,8 @@ async def react(client, message):
         await asyncio.sleep(e.x)
     except Exception as e:
         logger.error(f"Ошибка при добавлении реакции: {e}")
+
+
+if __name__ == "__main__":
+    logger.info("Запуск клиента...")
+    app.run()
