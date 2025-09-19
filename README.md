@@ -47,13 +47,28 @@ REACTION=⚡️
 CHANNELS= #название каналов через запятую
 ```
 
-3. Запуск через Docker Compose:
+3. Получение файлов сессии на локальной машине:
+
+- Для работы с личным аккаунтом сначала необходимо создать файлы сессии локально, выполнив бота на своей машине.
+- Файлы сессии будут созданы в папке `sessions/`:
+sessions/reaction_bot.session
+sessions/reaction_bot.session-journal
+
+4. Отправка файлов сессии на сервер (VPS):
+
+```
+scp /PATH/telegram-reaction-bot/sessions/reaction_bot.session
+/PATH/telegram-reaction-bot/sessions/reaction_bot.session-journal
+LOGIN@IP:/opt/telegram-reaction/sessions/
+```
+
+5. Запуск через Docker Compose:
 
 ```
 docker compose up -d --build
 ```
 
-4. Проверка логов:
+6. Проверка логов:
 
 ```
 docker-compose logs -f
@@ -67,7 +82,8 @@ docker-compose logs -f
 
 ```
 telegram_reaction_bot/
-├─ main.py               # Точка входа бота
+├─/sessions              # Папка для хранения сессии 
+├─main.py                # Точка входа бота
 ├─ bot_handler.py        # Основная логика работы с Pyrogram
 ├─ config.py             # Загрузка конфигурации из .env
 ├─ logger_setup.py       # Настройка логирования
@@ -89,7 +105,9 @@ telegram_reaction_bot/
 ## ⚡ Использование
 
 - Настроить файл `.env`.
-
+- Сначала получить локально файлы сессии.
+- Отправить их на сервер с помощью `scp`.
+- Запустить проект через Docker Compose.
 
 ---
 
