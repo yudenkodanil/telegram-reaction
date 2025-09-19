@@ -7,5 +7,5 @@ services:
     env_file:
       - .env
     volumes:
-      - /opt/tg-reaction/sessions:/app/sessions
+      - /opt/telegram-reaction/sessions:/app/sessions
     restart: unless-stopped
