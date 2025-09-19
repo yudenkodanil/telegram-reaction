@@ -26,7 +26,10 @@ logs/
 !.env.example
 
 # Pyrogram session files
-sessions/
+
+sessions/*.session
+sessions/*.session-journal
+
 
 # Docker
 *.pid
