@@ -27,6 +27,7 @@ logs/
 
 # Pyrogram session files
 *.session
+*.session-journal
 
 # Docker
 *.pid
