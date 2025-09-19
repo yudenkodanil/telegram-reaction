@@ -1,0 +1,37 @@
+# Python
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+*.egg
+*.egg-info/
+dist/
+build/
+*.pytest_cache/
+
+# Virtual Environment
+venv/
+env/
+.venv/
+
+# Logs
+logs/
+*.log
+
+# Environment variables
+.env
+.env.* 
+
+# Но оставляем .env.example
+!.env.example
+
+# Pyrogram session files
+*.session
+
+# Docker
+*.pid
+*.sock
+
+# OS files
+.DS_Store
+Thumbs.db

@@ -1,0 +1,11 @@
+version: "3.9"
+
+services:
+  reaction_bot:
+    build: .
+    container_name: reaction_bot
+    env_file:
+      - .env
+    volumes:
+      - /opt/tg-reaction/sessions:/app/sessions
+    restart: unless-stopped

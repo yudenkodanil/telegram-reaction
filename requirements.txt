@@ -1,0 +1,4 @@
+dotenv==0.9.9
+Pyrogram==2.0.106
+TgCrypto==1.2.5
+
