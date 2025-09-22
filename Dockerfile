@@ -1,39 +1,13 @@
-ARG PYTHON_VERSION=3.11-slim
-FROM python:${PYTHON_VERSION} AS base
-
-ENV PYTHONUNBUFFERED=1 \
-    PIP_NO_CACHE_DIR=1 \
-    PIP_DISABLE_PIP_VERSION_CHECK=1
+FROM python:3.11-slim
 
 WORKDIR /app
 
-# Устанавливаем зависимости для сборки, потом удалим их
-RUN apt-get update && apt-get install -y --no-install-recommends \
-    build-essential \
-    libffi-dev \
-    curl \
-    && rm -rf /var/lib/apt/lists/*
-
-# Копируем только requirements для кэширования слоя
 COPY requirements.txt .
+RUN pip install --no-cache-dir -r requirements.txt
 
-# Обновляем pip и устанавливаем зависимости
-RUN python -m pip install --upgrade pip setuptools wheel \
-    && pip install -r requirements.txt
+COPY app ./app
 
-# Копируем проект
-COPY . .
+# Каталоги для сессии и логов
+RUN mkdir -p /app/session /app/logs
 
-# Создаём непривилегированного пользователя и даём права на /app
-RUN addgroup --system appgroup && adduser --system --ingroup appgroup appuser \
-    && chown -R appuser:appgroup /app
-
-USER appuser
-
-EXPOSE 8080
-
-# необязательно: healthcheck (предпочтительнее реализовать /health в приложении)
-# HEALTHCHECK --interval=30s --timeout=5s --start-period=10s --retries=3 \
-#   CMD curl -f http://localhost:8080/health || exit 1
-
-CMD ["python", "main.py"]
+CMD ["python", "-m", "app.main"]

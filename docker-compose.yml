@@ -1,17 +1,16 @@
 version: "3.9"
 
 services:
-  reaction_bot:
+  telegram-reaction:
     build: .
-    container_name: reaction_bot
-    env_file:
-      - .env
+    container_name: telegram-reaction
     volumes:
-      - /opt/telegram-reaction/sessions:/app/sessions
-    restart: unless-stopped
-    healthcheck:
-      test: ["CMD", "curl", "-f", "http://localhost:8080/health"]
-      interval: 30s
-      timeout: 5s
-      retries: 3
-      start_period: 10s
+      - ./session:/app/session
+      - ./logs:/app/logs
+    environment:
+      - TG_API_ID=${TG_API_ID}
+      - TG_API_HASH=${TG_API_HASH}
+      - TG_CHANNELS=${TG_CHANNELS}
+      - TG_REACTION=${TG_REACTION}
+    stdin_open: true
+    tty: true
