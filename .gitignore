@@ -27,8 +27,8 @@ logs/
 
 # Pyrogram session files
 
-sessions/*.session
-sessions/*.session-journal
+session/*.session
+session/*.session-journal
 
 
 # Docker
@@ -38,3 +38,5 @@ sessions/*.session-journal
 # OS files
 .DS_Store
 Thumbs.db
+
+.sh
